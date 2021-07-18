@@ -71,3 +71,11 @@ code[class*="language-"],
 .alight:hover {
     color: var(--white-color);
 }
+
+.logoFont {
+    font-family: 'Racing Sans One', cursive;
+}
+
+.rcorners {
+    border-radius: 10%;
+}
