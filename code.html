@@ -63,17 +63,88 @@
             <div class="row row-cols-1 row-cols-lg-2">
                 <div class="col-lg-8">
                     <pre class="line-numbers"><code class="language-javascript">
-                            // Call HelloWorld
-
-                            function HelloWorld() {
-                                alert("Hello World!");
+                        // Get the values from the Page
+                        // Entry point - Controller function
+                        function getValues() {
+                        
+                            // Get values from page
+                            let startValue = document.getElementById("startValue").value;
+                            let endValue = document.getElementById("endValue").value;
+                        
+                            // Parse into integers
+                            startValue = parseInt(startValue);
+                            endValue = parseInt(endValue);
+                        
+                            if (Number.isInteger(startValue) && Number.isInteger(endValue)) {
+                                // Call generateNumbers
+                                let numbers = generateNumbers(startValue, endValue);
+                        
+                                // Call displayNumbers
+                                displayNumbers(numbers);
+                            } else {
+                                alert("You must enter integers")
                             }
+                        }
+                        
+                        // Generate numbers from startValue to endValue
+                        // Logic function
+                        function generateNumbers(startValue, endValue) {
+                        
+                            let numbers = [];
+                        
+                            // Get all numbers from start to end
+                            for (let index = startValue; index <= endValue; index++) {
+                                // Execute in a loop until index = endValue
+                                numbers.push(index);
+                            }
+                        
+                            return numbers;
+                        }
+                        
+                        // Display the numbers and mark even numbers in bold
+                        // Display/view function
+                        function displayNumbers(numbers) {
+                            
+                            let templateRows = "";
+                            for (let index = 0; index < numbers.length; index++) {
+                        
+                                let number = numbers[index];
+                                let className = "even";
+                                
+                                if(number % 2 == 0)
+                                {
+                                    className = "even";
+                                } else {
+                                    className = "odd";
+                                }
+                                // This does not render correctly with prism, see the source on Github.
+                                templateRows += `<tr><td class="${className}">${number}</td></tr>`;
+                            }
+                        
+                            document.getElementById("results").innerHTML = templateRows;
+                        }
                         </code></pre>
                 </div>
                 <div class="col-lg-4">
-                    <p>The code is structured in one function.</p>
-                    <h5>Hello World</h5>
-                    <p>HelloWorld is a function that displays and alert with a message of "Hello World!"</p>
+                    <p><span class="logoFont">Hundo</span> is a JavaScript coding challenge. We ask the user to input a starting and ending number. Next we show the results in a table, bolding the even numbers.</p>
+                    <h5>getValues()</h5>
+                    <p>We use the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document" target="_blank">JavaScript document API</a> to get the starting and ending values entered by the user.
+                    Next we verify the user's input can be parsed as an integer. If the input is valid we call the generateNumbers() function then then displayNumbers() function.
+                    </p>
+
+                    <h5>generateNumbers()</h5>
+                    <p>
+                        The generate numbers function takes the starting and ending values that the user entered as parameters. Next we use a for loop
+                        to populate an array from the starting value to the ending value. We then return this array to the calling function.
+                    </p>
+
+                    <h5>displayNumbers()</h5>
+                    <p>
+                        The displayNumbers() function takes the array we built in generateNumbers() and loops over it while populating the templateRows variable with 
+                        HTML used to display a table with rows for each number in the array. If the number is even we use CSS to apply `font-weight: bold;` to the HTML element. 
+                        Next we use the JavaScript document API again to set the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML" target="_blank">innerHTML</a> property, which
+                        we use to set the HTML contained within the element.
+                    </p>
                 </div>
             </div>
         </div>
